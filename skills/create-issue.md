@@ -1,12 +1,12 @@
 # Create Issue
 
-Create a Zoho Sprint Item or Task and set up the working branch.
+Create a Linear/Jira issue and set up the working branch.
 
 ## Prerequisites
 
-- Config: `~/.config/e2e/agents/zoho.json` + `~/.config/e2e/agents/.env`
-- CLI: `~/.config/e2e/agents/zoho-sprint.mjs`
-- If not configured, tell the user to run `/zoho-setup` first
+- Linear/Jira CLI installed and configured
+- Issue tracker credentials set up
+- Active project/team selected
 
 ## Instructions
 
@@ -15,67 +15,65 @@ When invoked, follow this exact workflow:
 ### 1. Gather Input
 
 Ask the user:
-- **Type**: Item or Task?
-  - If Task: which Item does it belong to? (ask for item ID or list items with the CLI)
 - **Title**: Short, descriptive title
 - **Description**: Brief description (1-2 sentences)
-- **Item type** (for Items only): Story (1), Bug (2), or Task (3). Default: Story.
+- **Issue type** (optional): Bug, Feature, Task, etc. Default: Feature.
 
-If $ARGUMENTS are provided, parse them as the title. Use Story as default type.
+If $ARGUMENTS are provided, parse them as the title. Use default type.
 
-### 2. Create in Zoho Sprint
+### 2. Create Issue in Tracker
 
-The CLI auto-detects the active sprint. No sprint ID needed.
+Use the appropriate CLI command for your issue tracker:
 
-For an **Item**:
+**Linear**:
 ```bash
-node ~/.config/e2e/agents/zoho-sprint.mjs create-item "<title>" --description "<description>" --type <1|2|3>
+linear issue create --title "<title>" --description "<description>"
 ```
 
-For a **Task** under an existing Item:
+**Jira**:
 ```bash
-node ~/.config/e2e/agents/zoho-sprint.mjs create-task <itemId> "<title>" --description "<description>"
+jira issue create --summary "<title>" --description "<description>"
 ```
 
-Parse the JSON output. Extract: `prefix` (e.g., `I42` or `T7`), `url`, `itemId`.
+Parse the output. Extract: `issueId` (e.g., `ENG-142` or `ABC-123`), `url`, `title`.
 
 ### 3. Create Branch
 
 ```bash
-git checkout -b feat/<prefix>-<slug>
+git checkout -b feat/<issueId>-<slug>
 ```
 
 Rules:
-- `<prefix>` = `I<itemNo>` for items, `T<taskNo>` for tasks
+- `<issueId>` = The issue identifier from tracker
 - `<slug>` = title lowercased, spaces to hyphens, strip special chars, max 40 chars
-- Example: `feat/I42-add-user-authentication`
+- Example: `feat/ENG-142-add-user-authentication`
 
-### 4. Write `.zoho-issue`
-
-```bash
-echo '<prefix>' > .zoho-issue
-```
-
-If `.zoho-issue` is not in `.gitignore`, add it.
-
-### 5. Output
+### 4. Output
 
 Print exactly:
 ```
-Zoho <prefix> created: <title>
+Issue <issueId> created: <title>
 <url>
-Branch: feat/<prefix>-<slug>
+Branch: feat/<issueId>-<slug>
 ```
 
-## Helper: List Items in Active Sprint
+## Helper: List Issues
 
-If user needs to pick a parent item for a task:
+If user needs to reference existing issues:
+
+**Linear**:
 ```bash
-node ~/.config/e2e/agents/zoho-sprint.mjs items
+linear issue list
+```
+
+**Jira**:
+```bash
+jira issue list
 ```
 
 ## Error Handling
 
-- Missing config → tell user to run `/zoho-setup`
-- No active sprint → show sprints list, ask user to pick with `--sprint <id>`
+- Missing CLI → tell user to install Linear or Jira CLI
+- Not authenticated → tell user to run `linear login` or `jira login`
+- No active team/project → show available teams/projects, ask user to select
 - API error → show the error from CLI output

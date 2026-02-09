@@ -55,8 +55,7 @@ curl -o ~/.cursor/AGENTS.md https://raw.githubusercontent.com/e2eneworks-oss/ski
 
 | Skill | Purpose | When to Use |
 |-------|---------|-------------|
-| **zoho-setup** | Configure Zoho Sprint OAuth | First-time Zoho integration |
-| **create-issue** | Create Zoho item + git branch | Starting new work |
+| **create-issue** | Create Linear/Jira issue + git branch | Starting new work |
 | **update-docs-and-commit** | Update CHANGELOG/docs + commit | Finishing work (before push) |
 
 ---
@@ -190,15 +189,61 @@ This suppresses ChatGPT's default conversational padding and gives you direct, a
    curl -o ~/.claude/CLAUDE.md https://raw.githubusercontent.com/e2eneworks-oss/skills/main/CLAUDE.md
    ```
 
-### Zoho OAuth fails
+### Issue tracker CLI fails
 
-1. Check internet connection
-2. Ensure no firewall blocking `127.0.0.1`
-3. Revoke and retry:
+1. Verify CLI is installed:
    ```bash
-   node ~/.claude/scripts/zoho-sprint.mjs revoke
-   /zoho-setup
+   which linear  # or: which jira
    ```
+2. Check authentication:
+   ```bash
+   linear status  # or: jira status
+   ```
+3. Re-authenticate if needed:
+   ```bash
+   linear login  # or: jira login
+   ```
+
+---
+
+## Typical Workflow
+
+```mermaid
+sequenceDiagram
+    participant Engineer
+    participant Agent
+    participant IssueTracker
+    participant Git
+
+    Engineer->>Agent: /create-issue "Add user profile caching"
+    Agent->>IssueTracker: create-item API call
+    IssueTracker-->>Agent: ENG-142 created
+    Agent->>Git: checkout -b feat/ENG-142-add-user-profile-caching
+    Agent-->>Engineer: Branch ready, ENG-142 created
+
+    Engineer->>Agent: "Act as CTO: How should we cache user profiles?"
+    Agent->>Agent: Explore codebase, analyze patterns
+    Agent-->>Engineer: Options presented with trade-offs
+
+    Engineer->>Agent: "Act as Senior Engineer: Implement with CAL and 5min TTL"
+    Agent->>Agent: Write code, add tests
+    Agent-->>Engineer: Implementation complete
+
+    Engineer->>Agent: /backend-review
+    Agent->>Agent: Check security, N+1, CAL usage
+    Agent-->>Engineer: Review report
+
+    Engineer->>Agent: /update-docs-and-commit
+    Agent->>Git: Update CHANGELOG + commit
+    Agent-->>Engineer: Committed
+```
+
+**Workflow Steps**:
+1. **Create issue** — `/create-issue` creates Linear/Jira ticket + git branch
+2. **Plan** — CTO mode explores options and presents trade-offs
+3. **Implement** — Senior Engineer mode writes code with tests
+4. **Review** — Domain-specific skills check quality, security, performance
+5. **Document** — Update CHANGELOG/docs and commit changes
 
 ---
 
