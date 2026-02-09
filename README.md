@@ -94,28 +94,6 @@ Skills in this repository follow these principles:
 
 ---
 
-## Stack-Specific Patterns
-
-### Backend (Python 3.11 / Django 5.2)
-
-- **DRF APIView** pattern with service layer (not ViewSets)
-- **SafeDeleteMixinExtended** for soft-delete models with cascade support
-- **cache-access-layer (CAL)** for caching abstraction (not Django cache directly)
-- **vault-sdk** for secrets management (not environment variables)
-- **pytest** with test transactions (no database mocking)
-- **Type hints** required (Python 3.11+ syntax)
-
-### Frontend (React 19+)
-
-- **shadcn/ui** + **Material UI** + **TailwindCSS** (all three in use)
-- **TypeScript** strict mode
-- **React Hook Form** + **Zod** for validation
-- **Jest** + **Testing Library** (no snapshot tests)
-- **Functional components** only (no class components)
-- **Lucide Icons** preferred
-
----
-
 ## ChatGPT Optimization
 
 ### Custom Instructions Setup
@@ -155,10 +133,9 @@ This suppresses ChatGPT's default conversational padding and gives you direct, a
 
 | Tool | Purpose | Link |
 |------|---------|------|
-| **SuperWhisper** | Audio input for AI agents (voice-to-code) | [github.com/erik/superwhisper](https://github.com/erik/superwhisper) |
-| **npx skills** | Install skills from this repo | [skills.sh/anthropics](https://skills.sh/anthropics) |
+| **SuperWhisper** | Audio input for AI agents (voice-to-code) | [Superwhisper](https://superwhisper.com) |
+| **npx skills** | Install skills from this repo | [skills.sh](https://skills.sh) |
 | **mermaid.live** | Diagram editor for sequence/architecture diagrams | [mermaid.live](https://mermaid.live) |
-| **gh CLI** | GitHub operations (PRs, issues) | [cli.github.com](https://cli.github.com) |
 
 **Coming soon**: User feedback research tool (in progress)
 
