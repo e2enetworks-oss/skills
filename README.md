@@ -55,7 +55,8 @@ curl -o ~/.cursor/AGENTS.md https://raw.githubusercontent.com/e2eneworks-oss/ski
 
 | Skill | Purpose | When to Use |
 |-------|---------|-------------|
-| **create-issue** | Create Linear/Jira issue + git branch | Starting new work |
+| **zoho-setup** | Configure Zoho Sprint OAuth | First-time Zoho integration |
+| **create-issue** | Create Linear/Jira/Zoho issue + git branch | Starting new work |
 | **update-docs-and-commit** | Update CHANGELOG/docs + commit | Finishing work (before push) |
 
 ---
@@ -193,15 +194,21 @@ This suppresses ChatGPT's default conversational padding and gives you direct, a
 
 1. Verify CLI is installed:
    ```bash
-   which linear  # or: which jira
+   which linear  # Linear
+   which jira    # Jira
+   ls ~/.config/e2e/agents/zoho-sprint.mjs  # Zoho
    ```
 2. Check authentication:
    ```bash
-   linear status  # or: jira status
+   linear status           # Linear
+   jira status             # Jira
+   # Zoho: run /zoho-setup if credentials missing
    ```
 3. Re-authenticate if needed:
    ```bash
-   linear login  # or: jira login
+   linear login           # Linear
+   jira login             # Jira
+   /zoho-setup            # Zoho
    ```
 
 ---
