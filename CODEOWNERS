@@ -1,0 +1,11 @@
+# Codeowners
+
+# Skills directory
+/skills/ @indykish
+
+# Scripts
+/scripts/ @indykish
+
+# Agent configs
+/CLAUDE.md @indykish
+/AGENTS.md @indykish
