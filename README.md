@@ -264,6 +264,6 @@ MIT
 
 ## Support
 
-**Issues**: [github.com/e2eneworks-oss/skills/issues](https://github.com/e2eneworks-oss/skills/issues)
+**Issues**: [github.com/e2enetworks-oss/skills/issues](https://github.com/e2enetworks-oss/skills/issues)
 
 **Maintainers**: [CODEOWNERS](https://github.com/e2enetworks-oss/skills/blob/main/CODEOWNERS)
