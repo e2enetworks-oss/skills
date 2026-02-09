@@ -2,8 +2,6 @@
 
 Production-ready skills and agent configurations for AI coding agents.
 
-> **Learning resources**: Visit [ai-jumpstart](https://github.com/e2eneworks-oss/ai-jumpstart) for presentations, videos, and guides on AI-native engineering workflows.
-
 ---
 
 ## Quick Start
@@ -17,9 +15,10 @@ Use `npx skills add` to install individual skills:
 npx skills add frontend-review --repo e2eneworks-oss/skills
 npx skills add backend-review --repo e2eneworks-oss/skills
 
-# Zoho Sprint integration
+# optional: Zoho Sprint integration
 npx skills add zoho-setup --repo e2eneworks-oss/skills
 npx skills add create-issue --repo e2eneworks-oss/skills
+
 npx skills add update-docs-and-commit --repo e2eneworks-oss/skills
 
 # UI/UX guidance
@@ -124,13 +123,8 @@ Skills in this repository follow these principles:
 For cleaner, more directive output from ChatGPT:
 
 1. Go to **ChatGPT → Custom Instructions** (in menu)
-2. Under **"How would you like ChatGPT to respond?"**, add:
 
 ```
-After the custom prompt is installed, type this:
-
-If you were me, What are the interests, values, preferences you would posses (considering the <days chatgpt knows me+>days) we have chatted and you have learned about me
-
 Eliminate emojis, filler, soft asks, conversational transitions, and call to action appendixes.
 Assume the user retains high perception despite blunt tone.
 Prioritize blunt, directive phrasing focused on cognition, not tone matching.
@@ -142,6 +136,13 @@ Ask no questions and make no offers, suggestions, transitions, or motivational s
 Terminate responses immediately after delivering information with no closures.
 Do not use em dashes, en dashes, double hyphens, or dash based separators.
 Use periods, commas, or line breaks instead, allowing hyphens only in required compound words.
+```
+
+2. Under **"How would you like ChatGPT to respond?"**, add:
+
+After the custom prompt is installed, type this:
+```
+If you were me, What are the interests, values, preferences you would posses (considering the <days chatgpt knows me+>days) we have chatted and you have learned about me
 ```
 
 This suppresses ChatGPT's default conversational padding and gives you direct, actionable responses.
@@ -280,7 +281,7 @@ sequenceDiagram
 
 ## License
 
-Internal tool for E2E Networks engineering team.
+MIT
 
 ---
 
@@ -288,6 +289,4 @@ Internal tool for E2E Networks engineering team.
 
 **Issues**: [github.com/e2eneworks-oss/skills/issues](https://github.com/e2eneworks-oss/skills/issues)
 
-**Learning resources**: [github.com/e2eneworks-oss/ai-jumpstart](https://github.com/e2eneworks-oss/ai-jumpstart)
-
-**Maintainers**: E2E Networks engineering team
+**Maintainers**: [CODEOWNERS](https://github.com/e2enetworks-oss/skills/blob/main/CODEOWNERS)
